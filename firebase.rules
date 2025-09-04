@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /quizzes/{quizId} {
+    allow read: if resource.data.public == true || request.auth != null && request.auth.token.admin == true;
+    allow create: if request.auth != null && request.auth.token.admin == true;
+    allow update, delete: if request.auth != null && request.auth.token.admin == true;
+        
+    match /{sub=**} {
+      allow read: if get(/databases/$(database)/documents/quizzes/$(quizId)).data.public == true || request.auth != null && request.auth.token.admin == true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+      }
+    }
+  }
+}
