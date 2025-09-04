@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
+import AdminDashboard from './pages/AdminDashboard'
+import AdminQuizEditor from './pages/AdminQuizEditor'
+import JoinScreen from './pages/JoinScreen'
+import PlayQuiz from './pages/PlayQuiz'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="min-h-screen">
+      <header className="bg-white shadow p-4">
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <Link to="/" className="font-bold">Quiz Admin</Link>
+          <nav>
+            <Link to="/admin" className="mr-4 text-sm">Admin</Link>
+          </nav>
+        </div>
+      </header>
+      <main className="py-6">
+        <div className="max-w-3xl mx-auto">
+          <Routes>
+            <Route path="/" element={<div className="p-4">Bienvenue — <Link to="/admin" className="text-blue-600">Aller à l'administration</Link></div>} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/edit/:quizId" element={<AdminQuizEditor />} />
+            <Route path="/play/:quizId" element={<JoinScreen />} />
+            <Route path="/play/:quizId/:playerId" element={<PlayQuiz />} />
+          </Routes>
+        </div>
+      </main>
+    </div>
   )
 }
-
-export default App
