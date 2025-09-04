@@ -12,10 +12,10 @@
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "firebase": "^10.0.0",
     "react-router-dom": "^6.11.0",
     "qrcode.react": "^1.0.1",
     "nanoid": "^4.0.0",
+    "firebase": "^10.0.0",    
     "recharts": "^2.3.0"    
   },
   "devDependencies": {
